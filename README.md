@@ -10,3 +10,4 @@
 * Git(HTTPSからSSH通信へ変更)
 * 
 2019/12/30　git clone
+            rails server　起動確認済み
