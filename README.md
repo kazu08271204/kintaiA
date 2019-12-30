@@ -8,3 +8,5 @@
 * Ruby
 * Rails
 * Git(HTTPSからSSH通信へ変更)
+* 
+2019/12/30　git clone
