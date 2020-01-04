@@ -7,16 +7,20 @@ class UsersController < ApplicationController
     #index,show,edit,updateアクションが実行される直前のみ、logged_in_userが実行
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:index, :edit, :destroy, :edit_basic_info, :update_basic_info]
+ 
   before_action :set_one_month, only: [:show]
   before_action :admin_or_correct_user, only: [:show]
+  before_action :no_admin_user, only: [:show]
   
   def index
-     @users = query.order(:id).page(params[:page])
+     @users = User.where.not(id: current_user.id)
+     
   end
   
   
   
   def show
+   
     @worked_sum = @attendances.where.not(started_at: nil).count
     #1ヶ月分の勤怠データの中で、出勤時間が何も無い状態では無いものの数を代入
   end

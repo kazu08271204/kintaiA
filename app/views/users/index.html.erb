@@ -2,9 +2,6 @@
 <h1>ユーザ一覧</h1>
 
 
-  
-
-<%= will_paginate %>
 
   <div class="name_form">
   <%= form_with model: User.new, method: :get, local: true do |form| %>
@@ -26,5 +23,4 @@
   <% end %>
 </ul>
 
-<%= will_paginate %>
 
