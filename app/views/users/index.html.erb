@@ -2,25 +2,60 @@
 <h1>ユーザ一覧</h1>
 
 
-
-  <div class="name_form">
-  <%= form_with model: User.new, method: :get, local: true do |form| %>
-  <%= form.label "ユーザー名検索" %><br>
-  <%= form.text_field :name %>
-  <%= form.submit "検索", {class: "search_name"} %>
-  <% end %>
-  </div>
-
 <ul class="users">
   <% @users.each do |user| %>
-    <li>
+  <li>
       <%= link_to user.name, user %>
       <% if current_user.admin? && !current_user?(user) %>
-    ｜<%= link_to "基本情報編集", edit_basic_info_user_path(user) %>
-    ｜<%= link_to "削除", user, method: :delete, data: { confirm: "削除してよろしいですか？" } %>
+      ｜<%= link_to "削除", user, method: :delete, data: { confirm: "削除してよろしいですか？" } %>
+ 
+ <div class="panel panel-default">
+    
+       <button type="button" class="btn btn-primary btn-sm" data-toggle="collapse" data-target= #<%= user.id %> >編集</button>
+        <div id= <%= user.id %> class="collapse">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class = "row" >
+                <div class = "col-md-6 col-md-offset-3">
+                  <%= form_with(model: user, local: true) do |f| %>
+                  <%= f.label :name, class: "label-#{yield(:class_text)}" %>
+                  <%= f.text_field :name, class: "form-control" %>
+                
+                  <%= f.label :email, class: "label-#{yield(:class_text)}" %>
+                  <%= f.email_field :email, class: "form-control" %>
+                  
+                  <%= f.label :department, class: "label-#{yield(:class_text)}" %>
+                  <%= f.text_field :department, class: "form-control" %>
+                
+                  <%= f.label :password, class: "label-#{yield(:class_text)}" %>
+                  <%= f.password_field :password, class: "form-control" %>
+                  <%= f.label :basic_time %>
+                  <%= f.time_field :basic_time, class: 'form-control' %>
+            
+            
+                  <%= f.label :work_time %>
+                  <%= f.time_field :work_time, class: "form-control" %>
+                  <%= f.submit "更新する", class: "btn btn-primary btn-block btn-base" %>
+                  <% end %>
+  
+    
+                </div>
+  
+             </div>
+            </div>
+          </div>
+        </div>
+    
+    </div>
+  
+ 
   <% end %>
-    </li>
+  
+  </li>
+   
   <% end %>
+  
+  
 </ul>
 
 

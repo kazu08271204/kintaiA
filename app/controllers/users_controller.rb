@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
     
   end
   
@@ -73,6 +74,10 @@ class UsersController < ApplicationController
     else
       render 'edit_basic_info'
     end
+  end
+  
+  
+  def attendance_list
   end
 
   private
