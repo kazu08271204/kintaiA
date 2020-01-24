@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   
   def index
      @users = User.where.not(id: current_user.id)
-     
+     #@users = User.all
   end
   
   
@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
     
   end
   
@@ -74,15 +75,19 @@ class UsersController < ApplicationController
       render 'edit_basic_info'
     end
   end
+  
+  
+  def attendance_list
+  end
 
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :department, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :department, :password, :password_confirmation) #更新に対応するためのStrongParameters
   end
   
   def basic_info_params
-    params.require(:user).permit(:basic_time, :work_time)
+    params.require(:user).permit(:name, :email, :department, :password, :password_confirmation) #更新に対応するためのStrongParameters
   end
   
   
