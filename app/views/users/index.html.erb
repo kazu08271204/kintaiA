@@ -1,8 +1,8 @@
 <% provide(:title, '一覧') %>
-<h1>ユーザ一覧</h1>
-
-
-
+  <h1>ユーザ一覧</h1>
+  
+  
+  <div class="row">
   <div class="name_form">
   <%= form_with model: User.new, method: :get, local: true do |form| %>
   <%= form.label "ユーザー名検索" %><br>
@@ -10,50 +10,54 @@
   <%= form.submit "検索", {class: "search_name"} %>
   <% end %>
   </div>
-
-<ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to user.name, user %>
-      <% if current_user.admin? && !current_user?(user) %>
-    ｜<%= link_to "基本情報編集", edit_basic_info_user_path(user) %>
-    ｜<%= link_to "削除", user, method: :delete, data: { confirm: "削除してよろしいですか？" } %>
-    
-    
-   
-    <% end %>
-    </li>
-  <% end %>
-</ul>
-
-
- <ul class="users">
- <% @users.each do |user| %>
- <li>
- <%= link_to user.name, user %>
-
- <% if current_user.admin? && !current_user?(user) %>
- ｜<%= link_to "削除", user, method: :delete, data: { confirm: "削除してよろしいですか？" } %>
-  
- <div class="panel-group">
- <div class="panel panel-default">
- <div class="panel-heading">
- <h4 class="panel-title">
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="collapse"  data-target= #<%= user.id %> >編集</button>
- </h4> 
- <div id= <%= user.id %> class="collapse">
- <div class = "row" >
- <div class = "col-md-6 col-md-offset-3">
-    ppppppppppppppppppp
-</div>
-
- </div>
- </div>
- </div>
- </div>
   </div>
-<% end %>
  
- </li>
-<% end %>
-</ul>
+  
+   <ul class="users">
+   <% @users.each do |user| %>
+   <li>
+   <%= link_to user.name, user %>
+  
+   <% if current_user.admin? && !current_user?(user) %>
+   ｜<%= link_to "削除", user, method: :delete, data: { confirm: "削除してよろしいですか？" } %>
+    
+   <div class="panel-group">
+   <div class="panel panel-default">
+   <div class="panel-heading">
+   <h4 class="panel-title">
+      <button type="button" class="btn btn-primary btn-sm" data-toggle="collapse"  data-target= #<%= user.id %> >編集</button>
+   </h4> 
+   <div id= <%= user.id %> class="collapse">
+   <div class = "row" >
+   <div class = "col-md-6 col-md-offset-3">
+    <%= form_with(model: user, local: true, url: update_basic_info_user_path(user)) do |f| %>
+        
+  
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control" %>
+        <%= f.label :department %>
+        <%= f.text_field :department, class: "form-control" %>
+  
+        
+        <%= f.label :basic_time %>
+        <%= f.time_field :basic_time, class: 'form-control' %>
+        <%= f.label :work_time %>
+        <%= f.time_field :work_time, class: "form-control" %>
+        
+        <%= f.submit "更新する", class: "btn btn-primary btn-block btn-base" %>
+      <% end %>
+  
+    </div>
+  
+   </div>
+   </div>
+   </div>
+   </div>
+   </div>
+  <% end %>
+   
+   </li>
+  <% end %>
+  </ul>
