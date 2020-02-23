@@ -78,6 +78,10 @@ class UsersController < ApplicationController
       render :index
     end
   end
+  
+  
+  def attendance_list
+  end
 
   
   def attendance_list
