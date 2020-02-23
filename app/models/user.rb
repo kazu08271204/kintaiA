@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 100 }, # 存 在性、文字数の検証
                     format: { with: VALID_EMAIL_REGEX}, # メールアドレスの有効性
                     uniqueness: true # 一意性
-  validates :department, length: { in: 3..50 }, allow_blank: true
+  validates :department, length: { in: 1..50 }, allow_blank: true
   validates :basic_time, presence: true
   validates :work_time, presence: true
   

@@ -1,27 +1,35 @@
-<% provide(:title, "基本情報編集") %>
+<% provide(:title, "基本情報修正") %>
 
-<h1>基本情報の編集</h1>
+<h1>基本情報の修正</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user, url: update_basic_info_user_path(params: {id: @user.id})) do |f| %>
-      <%= render 'shared/error_messages', object: @user %>
-
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control" %>
-      <%= f.label :email %>
-      <%= f.email_field :email, class: "form-control" %>
-      <%= f.label :department %>
-      <%= f.text_field :department, class: "form-control" %>
-
-      
-      <%= f.label :basic_time %>
-      <%= f.time_field :basic_time, class: 'form-control' %>
-      <%= f.label :work_time %>
-      <%= f.time_field :work_time, class: "form-control" %>
-      
-      <%= f.submit "更新する", class: "btn btn-primary btn-block btn-base" %>
-    <% end %>
+   <%= form_with(model: @user, local: true, url: update_basic_info_user_path(user.id)) do |f| %>
+        
+  
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control" %>
+        <%= f.label :department %>
+        <%= f.text_field :department, class: "form-control" %>
+        <%= f.label :empoloyee_number%>
+        <%= f.time_field :empoloyee_number, class: 'form-control' %>
+        <%= f.label :uid %>
+        <%= f._field :uid, class: "form-control" %>
+        
+        
+        
+        <%= f.label :basic_time %>
+        <%= f.time_field :basic_time, class: 'form-control' %>
+        <%= f.label :work_time %>
+        <%= f.time_field :work_time, class: "form-control" %>
+        
+        
+        <%= f.submit "更新する", class: "btn btn-primary btn-block btn-base" %>
+      <% end %>
+  
   </div>
+  
 </div>
 

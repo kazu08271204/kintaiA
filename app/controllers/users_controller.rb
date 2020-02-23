@@ -13,7 +13,8 @@ class UsersController < ApplicationController
   before_action :no_admin_user, only: [:show]
   
   def index
-     @users = User.where.not(id: current_user.id)
+     @users = User.where.not(id: current_user.id) #自分以外
+     #users = User.all
      
   end
   
@@ -68,14 +69,16 @@ class UsersController < ApplicationController
 
   def update_basic_info
     @user = User.find(params[:id])
-    if @user.update_attributes(basic_info_params)
+    @users = User.where.not(id: current_user.id) #自分以外
+    if @user.update_attributes(basic_info_params) #basic_info_paramsをupdate
       flash[:success] = "基本情報を更新しました。"
       redirect_to @user   
     else
-      render 'edit_basic_info'
+      #render :template => "static_pages/top" #static_pagesコントローラーのtopアクション
+      render :index
     end
   end
-  
+
   
   def attendance_list
   end
@@ -87,7 +90,8 @@ class UsersController < ApplicationController
   end
   
   def basic_info_params
-    params.require(:user).permit(:name, :email, :department, :password, :password_confirmation) #更新に対応するためのStrongParameters
+    params.require(:user).permit(:name, :email, :department, :password, :password_confirmation,
+    :empoloyee_number, :uid, :basic_time, :work_time, :designated_work_start_time, :designated_work_end_time ) #更新に対応するためのStrongParameters
   end
   
   
